@@ -22,3 +22,16 @@ db_upgrade:
 
 db_downgrade:
 	flask db downgrade
+
+pybabel_extract:
+	pybabel extract -F babel.cfg -k _l -o messages.pot .
+
+pybabel_es:
+	pybabel init -i messages.pot -d app/translations -l es
+
+pybabel_compile:
+	pybabel compile -d app/translations
+
+pybabel_update:
+	pybabel extract -F babel.cfg -k _l -o messages.pot .
+	pybabel update -i messages.pot -d app/translations
