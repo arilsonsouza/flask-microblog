@@ -1,4 +1,4 @@
-2020-07-25 19:42:58,944 ERROR: Exception on /edit-profile [POST] [in /home/arilson/workspace/python/flask-microblog/venv/lib/python3.6/site-packages/flask/app.py:1892]
+2020-07-25 19:44:45,895 ERROR: Exception on /edit-profile [POST] [in /home/arilson/workspace/python/flask-microblog/venv/lib/python3.6/site-packages/flask/app.py:1892]
 Traceback (most recent call last):
   File "/home/arilson/workspace/python/flask-microblog/venv/lib/python3.6/site-packages/sqlalchemy/engine/base.py", line 1278, in _execute_context
     cursor, statement, parameters, context
@@ -75,3 +75,37 @@ DETAIL:  Key (username)=(arilson) already exists.
 [SQL: UPDATE users SET username=%(username)s, about_me=%(about_me)s WHERE users.id = %(users_id)s]
 [parameters: {'username': 'arilson', 'about_me': 'About me', 'users_id': 2}]
 (Background on this error at: http://sqlalche.me/e/13/gkpj)
+2020-07-25 19:46:03,477 INFO: Microblog startup [in /home/arilson/workspace/python/flask-microblog/app/__init__.py:49]
+2020-07-25 21:21:46,722 INFO: Microblog startup [in /home/arilson/workspace/python/flask-microblog/app/__init__.py:49]
+2020-07-25 21:22:31,916 INFO: Microblog startup [in /home/arilson/workspace/python/flask-microblog/app/__init__.py:49]
+2020-07-25 21:48:48,817 INFO: Microblog startup [in /home/arilson/workspace/python/flask-microblog/app/__init__.py:49]
+2020-07-25 21:49:17,698 INFO: Microblog startup [in /home/arilson/workspace/python/flask-microblog/app/__init__.py:49]
+2020-07-25 21:50:00,507 INFO: Microblog startup [in /home/arilson/workspace/python/flask-microblog/app/__init__.py:49]
+2020-07-25 21:51:10,850 INFO: Microblog startup [in /home/arilson/workspace/python/flask-microblog/app/__init__.py:49]
+2020-07-25 21:52:06,677 INFO: Microblog startup [in /home/arilson/workspace/python/flask-microblog/app/__init__.py:49]
+2020-07-25 22:05:02,387 INFO: Microblog startup [in /home/arilson/workspace/python/flask-microblog/app/__init__.py:49]
+2020-07-25 22:05:14,661 INFO: Microblog startup [in /home/arilson/workspace/python/flask-microblog/app/__init__.py:49]
+2020-07-25 22:20:31,887 INFO: Microblog startup [in /home/arilson/workspace/python/flask-microblog/app/__init__.py:49]
+2020-07-25 22:21:44,126 INFO: Microblog startup [in /home/arilson/workspace/python/flask-microblog/app/__init__.py:49]
+2020-07-25 22:23:50,461 INFO: Microblog startup [in /home/arilson/workspace/python/flask-microblog/app/__init__.py:49]
+2020-07-25 22:24:00,539 INFO: Microblog startup [in /home/arilson/workspace/python/flask-microblog/app/__init__.py:49]
+2020-07-25 22:24:04,445 INFO: Microblog startup [in /home/arilson/workspace/python/flask-microblog/app/__init__.py:49]
+2020-07-25 22:24:10,469 ERROR: Exception on /explore [GET] [in /home/arilson/workspace/python/flask-microblog/venv/lib/python3.6/site-packages/flask/app.py:1892]
+Traceback (most recent call last):
+  File "/home/arilson/workspace/python/flask-microblog/venv/lib/python3.6/site-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/arilson/workspace/python/flask-microblog/venv/lib/python3.6/site-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/arilson/workspace/python/flask-microblog/venv/lib/python3.6/site-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/arilson/workspace/python/flask-microblog/venv/lib/python3.6/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/home/arilson/workspace/python/flask-microblog/venv/lib/python3.6/site-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/arilson/workspace/python/flask-microblog/venv/lib/python3.6/site-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/arilson/workspace/python/flask-microblog/venv/lib/python3.6/site-packages/flask_login/utils.py", line 272, in decorated_view
+    return func(*args, **kwargs)
+  File "/home/arilson/workspace/python/flask-microblog/app/routes.py", line 163, in explore
+    posts = Post.query.oder_by(Post.created_at.desc()).all()
+AttributeError: 'BaseQuery' object has no attribute 'oder_by'
