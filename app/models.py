@@ -92,7 +92,8 @@ class Post(db.Model):
 	user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 	body = db.Column(db.String(140))
 	created_at = db.Column(db.DateTime, index=True, default=datetime.utcnow)
-
+	language = db.Column(db.String(5))
+	
 	def __repr__(self):
 		return f'<Post {self.body}>'
 

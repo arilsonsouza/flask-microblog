@@ -8,6 +8,8 @@ flask-moment==0.10.0
 flask-migrate==2.5.3
 flask-sqlalchemy==2.4.4
 flask-wtf==0.14.3
+guess_language-spirit=0.5.3
 psycopg2==2.8.5
 pyjwt=1.7.1
 python-dotenv==0.14.0
+requests==2.24.0

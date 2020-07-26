@@ -26,7 +26,7 @@ babel = Babel(app)
 
 @babel.localeselector
 def get_locale():
-	return 'es' #request.accept_languages.best_match(app.config['LANGUAGES'])
+	return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 if not app.debug:
 	if app.config['MAIL_SERVER']:
