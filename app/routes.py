@@ -17,6 +17,7 @@ from werkzeug.urls import url_parse
 from app import app
 from app.forms import (
 	LoginForm,
+	EmptyForm,
 	EditProfileFrom,
 	RegistrationForm,
 )
@@ -89,8 +90,9 @@ def user(username):
 		{'author': user, 'body': 'Test post #1'},
 		{'author': user, 'body': 'Test post #2'},
 	]
+	form = EmptyForm()
 
-	return render_template('user.html', user=user, posts=posts)
+	return render_template('user.html', user=user, posts=posts, form=form)
 
 @app.route('/edit-profile', methods=['GET', 'POST'])
 @login_required
@@ -107,3 +109,43 @@ def edit_profile():
 		form.about_me.data = current_user.about_me
 
 	return render_template('edit_profile.html', title='Edit Profile', form=form)
+
+@app.route('/follow/<username>', methods=['POST'])
+@login_required
+def follow(username):
+	form = EmptyForm()
+	if form.validate_on_submit():
+		user = User.query.filter_by(username=username).first()
+		if user is None:
+			flash(f'User {username} not found.')
+			return redirect(url_for('index'))
+		if user == current_user:
+			flash('You cannot follow yoursef!')
+			return redirect(url_for('user', username=username))
+
+		current_user.follow(user)
+		db.session.commit()
+		flash(f'You are following {username}!')
+		return redirect(url_for('user', username=username))
+	else:
+		return redirect(url_for('index'))
+
+@app.route('/follow/<username>', methods=['POST'])
+@login_required
+def unfollow(username):
+	form = EmptyForm()
+	if form.validate_on_submit():
+		user = User.query.filter_by(username=username).first()
+		if user is None:
+			flash(f'User {username} not found.')
+			return redirect(url_for('index'))
+		if user == current_user:
+			flash('You cannot unfollow yoursef!')
+			return redirect(url_for('user', username=username))
+
+		current_user.unfollow(user)
+		db.session.commit()
+		flash(f'You are not following {username}')
+		return redirect(url_for('user', username=username))
+	else:
+		return redirect(url_for('index'))
