@@ -1,6 +1,8 @@
 import os
+from dotenv import load_dotenv
 
 BASEDIR = os.path.abspath(os.path.dirname(__file__))
+load_dotenv(os.path.join(BASEDIR, '.env'))
 
 POSTGRES_URL = os.environ.get('POSTGRES_URL')
 POSTGRES_USER = os.environ.get('POSTGRES_USER')

@@ -35,3 +35,6 @@ pybabel_compile:
 pybabel_update:
 	pybabel extract -F babel.cfg -k _l -o messages.pot .
 	pybabel update -i messages.pot -d app/translations
+
+pip_freeze_requirements:
+	pip freeze > requirements.txt
