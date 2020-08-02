@@ -13,4 +13,5 @@ guess_language-spirit=0.5.3
 psycopg2==2.8.5
 pyjwt=1.7.1
 python-dotenv==0.14.0
+rq==1.5.0
 requests==2.24.0

@@ -58,6 +58,22 @@
 
 {% block content %}
 <div class="container">
+    
+    {% if current_user.is_authenticated %}
+        {% with tasks = current_user.get_tasks_in_progress() %}
+            {% if tasks %}
+                {% for task in tasks %}
+                    <div class="alert alert-success" role="alert">
+                        {{ task.description }}
+                        <span id="{{ task.id }}-progress">
+                            {{ task.get_progress() }}%
+                        </span>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    {% endif %}
+
     {% with messages = get_flashed_messages() %}
     {% if messages %}
         {% for message in messages %}
@@ -131,22 +147,39 @@
         $('#message_count').text(n);
         $('#message_count').css('visibility', n ? 'visible': 'hidden')
     }
-
+    
+    function set_task_progress(task_id, progress) {
+        $(`#${task_id}-progress`).text(progress)
+    }
+    
     {% if current_user.is_authenticated %}
         $(() => {
             let since = 0
             setInterval(()=> {
                 $.ajax(`{{ url_for('main.notifications')}}?since=${since}`).done(notifications => {
+                    let notificationName = ''
                     notifications.forEach(notification => {
-                        if (notification.name === 'unread_message_count') {
-                            set_message_count(notification.data)
-                            since = notification.created_at
+                        notificationName = notification.name
+                        switch(notificationName){
+                            case 'unread_message_count':
+                                set_message_count(notification.data)
+                                break
+                            case 'task_progress':
+                                set_task_progress(
+                                    notification.data.task_id,
+                                    notification.data.progress
+                                )
+                                break
                         }
+                       
+                        since = notification.created_at
+                        
                     })
                 })
             }, 10000)
         })
     {% endif %}
+   
     </script>
     }
 {% endblock %}
