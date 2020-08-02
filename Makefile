@@ -14,6 +14,9 @@ clean:
 install:
 	pip install -e .['dev']
 
+run:
+	flask run
+	
 db_init:
 	flask db init
 
